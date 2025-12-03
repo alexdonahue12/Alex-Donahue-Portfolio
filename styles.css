@@ -1,0 +1,2625 @@
+/* styles.css
+   Lightweight, mobile-first portfolio styles
+   - CSS variables for colors, spacing, and type scale
+   - Max-width container: 72ch
+   - System font stack, generous line-height
+   - Two-column main grid on wider screens
+   - .card utility for reusable panels
+*/
+
+/* ================================
+   Design tokens (CSS variables)
+=================================== */
+:root {
+  /* Colors */
+  --color-bg: #f7f7f9;
+  --color-surface: #ffffff;
+  --color-border: #e0e0e5;
+  --color-text: #141414;
+  --color-text-muted: #6b6b78;
+  --color-accent: hsl(0, 0%, 0%);
+  --color-accent-soft: rgba(37, 99, 235, 0.08);
+  --color-shadow-soft: rgba(15, 23, 42, 0.09);
+
+  /* Typography */
+  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+
+  /* Type scale */
+  --font-size-xs: 0.78rem;
+  --font-size-sm: 0.88rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+
+  /* Line heights */
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* Spacing scale */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Radii & shadow */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.25rem;
+  --shadow-soft: 0 14px 30px var(--color-shadow-soft);
+
+  /* Layout */
+  --container-max-width: 100%;
+  --nav-height: 3.75rem;
+}
+
+/* ================================
+   Base reset-ish
+=================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+/* Links & focus */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+:where(a, button, input, select, textarea) {
+  outline: none;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--space-2);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: var(--line-height-tight);
+}
+
+h1 {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
+}
+
+h2 {
+  font-size: clamp(var(--font-size-xl), 3vw, var(--font-size-2xl));
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+/* Utility text */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.page-intro,
+.section-intro {
+  max-width: 40rem;
+  color: var(--color-text-muted);
+}
+
+/* ================================
+   Layout helpers
+=================================== */
+.container {
+  width: 100%;
+  max-width: 100%; /* full width */
+  padding-inline: 3.5rem; /* small side padding */
+  margin: 0 auto;
+}
+
+.site-main {
+  padding-block: var(--space-6);
+}
+
+/* Main content grid (apply where needed)
+   Example:
+   <div class="container main-grid">
+     <div class="main-grid-primary">...</div>
+     <aside class="main-grid-sidebar">...</aside>
+   </div>
+*/
+.main-grid {
+  display: block;
+  gap: var(--space-6);
+}
+
+.main-grid-primary,
+.main-grid-sidebar {
+  margin-bottom: var(--space-6);
+}
+
+/* Two-column layout on wider screens */
+@media (min-width: 900px) {
+  .main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    align-items: flex-start;
+  }
+
+  .main-grid-primary,
+  .main-grid-sidebar {
+    margin-bottom: 0;
+  }
+}
+
+/* Generic sections */
+.section {
+  padding-block: var(--space-6);
+}
+
+/* ================================
+   Skip link
+=================================== */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -200%);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: var(--font-size-sm);
+  z-index: 999;
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, var(--space-2));
+}
+
+/* ================================
+   Header & navigation
+=================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background-color: rgba(247, 247, 249, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+}
+
+.site-logo {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Nav */
+.site-nav {
+  display: none;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-4);
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list a {
+  font-size: var(--font-size-sm);
+  text-transform: lowercase;
+  color: var(--color-text-muted);
+  padding-block: var(--space-1);
+}
+
+.nav-list a[aria-current="page"] {
+  color: var(--color-text);
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-list a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15rem;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  background-color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.menu-icon {
+  width: 18px;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 999px;
+  position: relative;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--color-text);
+  transition: transform 0.18s ease, top 0.18s ease, bottom 0.18s ease, opacity 0.18s ease;
+}
+
+.menu-icon::before {
+  top: -5px;
+}
+
+.menu-icon::after {
+  bottom: -5px;
+}
+
+.menu-toggle.is-active .menu-icon {
+  background-color: transparent;
+}
+
+.menu-toggle.is-active .menu-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.is-active .menu-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* Mobile nav open */
+.site-nav.is-open {
+  display: block;
+  margin-top: var(--space-3);
+}
+
+.site-nav.is-open .nav-list {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Desktop nav */
+@media (min-width: 768px) {
+  .menu-toggle {
+    display: none;
+  }
+
+  .site-nav {
+    display: block;
+  }
+
+  .site-nav.is-open {
+    margin-top: 0;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ================================
+   WildBoar nav
+=================================== */
+.wild-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background-color: #9e4d4a;
+  backdrop-filter: blur(10px);
+}
+
+.wild-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+}
+
+.wild-site-logo {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Nav */
+.wild-site-nav {
+  display: none;
+}
+
+.wild-nav-list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-4);
+  padding: 0;
+  margin: 0;
+}
+
+.wild-nav-list a {
+  font-size: var(--font-size-sm);
+  text-transform: lowercase;
+  color: #000000;
+  padding-block: var(--space-1);
+}
+
+.wild-nav-list a[aria-current="page"] {
+  color: var(--color-text);
+  font-weight: 600;
+  position: relative;
+}
+
+.wild-nav-list a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15rem;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+}
+
+/* Mobile menu toggle */
+.wild-menu-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  background-color: #9e4d4a;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wild-menu-icon {
+  width: 18px;
+  height: 2px;
+  background-color: var(--color-text);
+  border-radius: 999px;
+  position: relative;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.wild-menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--color-text);
+  transition: transform 0.18s ease, top 0.18s ease, bottom 0.18s ease, opacity 0.18s ease;
+}
+
+.wild-menu-icon::before {
+  top: -5px;
+}
+
+.wild-menu-icon::after {
+  bottom: -5px;
+}
+
+.wild-menu-toggle.is-active .wild-menu-icon {
+  background-color: transparent;
+}
+
+.wild-menu-toggle.is-active .wild-menu-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.wild-menu-toggle.is-active .wild-menu-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* Mobile nav open */
+.wild-site-nav.is-open {
+  display: block;
+  margin-top: var(--space-3);
+}
+
+.wild-site-nav.is-open .wild-nav-list {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Desktop nav */
+@media (min-width: 768px) {
+  .wild-menu-toggle {
+    display: none;
+  }
+
+  .wild-site-nav {
+    display: block;
+  }
+
+  .wild-site-nav.is-open {
+    margin-top: 0;
+  }
+
+  .wild-nav-list {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ================================
+   ABC nav
+=================================== */
+.abc-site-header {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  background-color: #254542;
+  backdrop-filter: blur(10px);
+}
+
+.abc-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--nav-height);
+}
+
+.abc-site-logo {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: var(--font-size-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Nav */
+.abc-site-nav {
+  display: none;
+}
+
+.abc-nav-list {
+  list-style: none;
+  display: flex;
+  gap: var(--space-4);
+  padding: 0;
+  margin: 0;
+}
+
+.abc-nav-list a {
+  font-size: var(--font-size-sm);
+  text-transform: lowercase;
+  color: #000000;
+  padding-block: var(--space-1);
+}
+
+.abc-nav-list a[aria-current="page"] {
+  color: var(--color-text);
+  font-weight: 600;
+  position: relative;
+}
+
+.abc-nav-list a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.15rem;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-text);
+}
+
+/* Mobile menu toggle */
+.abc-menu-toggle {
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  background-color: #254542;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.abc-menu-icon {
+  width: 18px;
+  height: 2px;
+  background-color: #254542;
+  border-radius: 999px;
+  position: relative;
+  transition: transform 0.18s ease, background-color 0.18s ease;
+}
+
+.abc-menu-icon::before,
+.menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 999px;
+  background-color: var(--color-text);
+  transition: transform 0.18s ease, top 0.18s ease, bottom 0.18s ease, opacity 0.18s ease;
+}
+
+.abc-menu-icon::before {
+  top: -5px;
+}
+
+.abc-menu-icon::after {
+  bottom: -5px;
+}
+
+.abc-menu-toggle.is-active .abc-menu-icon {
+  background-color: transparent;
+}
+
+.abc-menu-toggle.is-active .abc-menu-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.abc-menu-toggle.is-active .abc-menu-icon::after {
+  bottom: 0;
+  transform: rotate(-45deg);
+}
+
+/* Mobile nav open */
+.abc-site-nav.is-open {
+  display: block;
+  margin-top: var(--space-3);
+}
+
+.abc-site-nav.is-open .abc-nav-list {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Desktop nav */
+@media (min-width: 768px) {
+  .abc-menu-toggle {
+    display: none;
+  }
+
+  .abc-site-nav {
+    display: block;
+  }
+
+  .abc-site-nav.is-open {
+    margin-top: 0;
+  }
+
+  .abc-nav-list {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* ================================
+   Hero
+=================================== */
+.hero {
+  margin-top: 2rem; /* adjust to 3rem or 4rem if you want more */
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding-block: var(--space-6);
+
+  /* Add space from edges of the screen */
+  margin-inline: 3.5rem; /* increase to 2rem, 3rem, etc. */
+}
+
+.hero-inner {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* Side-by-side layout on desktop */
+@media (min-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.hero-inner {
+  padding-inline: var(--space-6);
+}
+
+.hero-content {
+  max-width: 36rem;
+}
+
+.hero-text {
+  color: var(--color-text-muted);
+}
+
+/* If you have a hero portrait column */
+.hero-portrait {
+  max-width: 22rem;
+}
+
+.hero-portrait .portrait-img {
+  border-radius: var(--radius-lg);
+}
+
+.hero-portrait img {
+  max-width: 100%;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Two-column hero on wider screens */
+@media (min-width: 900px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: center;
+  }
+}
+
+/* Reverse layout for About hero on desktop */
+@media (min-width: 900px) {
+  .about-hero-inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+
+/* ================================
+   Buttons
+=================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  box-shadow: 0 10px 20px var(--color-accent-soft);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: #5a5a5a;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background-color: rgba(148, 163, 184, 0.08);
+  text-decoration: none;
+}
+
+/* ================================
+   Cards (utility)
+=================================== */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ================================
+   Project grid (optional)
+=================================== */
+.project-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.project-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* Card container */
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+
+  /* Make the card a square */
+  aspect-ratio: 1 / 1;
+}
+
+.project-card .project-link {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  text-indent: -9999px; /* hide text if you add some */
+}
+
+/* Thumbnail image (uniform size) */
+.project-thumb {
+  width: 100%;
+  height: 100%;     /* fill the square card */
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Hover overlay content */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff; /* default overlay color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Ensure overlay text color */
+.project-overlay h3,
+.project-overlay p {
+  color: inherit;
+}
+
+/* Hover effect */
+.project-card:hover .project-overlay,
+.project-card:focus-within .project-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover .project-thumb,
+.project-card:focus-within .project-thumb {
+  transform: scale(1.05);
+  filter: brightness(0.6);
+}
+
+/* Optional: lock to 2 columns on larger screens */
+@media (min-width: 768px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Hover overlay content */
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff; /* default overlay color */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(10%);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Explicitly ensure ALL text is white */
+.project-overlay h3,
+.project-overlay p {
+  color: inherit;
+}
+
+/* Hover effect */
+.project-card:hover .project-overlay,
+.project-card:focus-within .project-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-card:hover img.project-thumb,
+.project-card:focus-within img.project-thumb {
+  transform: scale(1.05);
+  filter: brightness(0.6);
+}
+
+/* ================================
+   About & contact layouts
+=================================== */
+.about-layout,
+.contact-layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.about-photo {
+  max-width: 18rem;
+}
+
+.about-photo .portrait-img {
+  border-radius: var(--radius-lg);
+}
+
+.about-text p {
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 900px) {
+  .about-layout,
+  .contact-layout {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
+    align-items: flex-start;
+  }
+}
+
+/* Forms */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.form-field label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.required-indicator {
+  font-weight: 400;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  background-color: #ffffff;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+/* ================================
+   Project case study pages
+=================================== */
+
+/* ================================
+   Project case study pages
+=================================== */
+
+.case-page {
+  /* fallback color behind image */
+  background-color: #f3f4f6;
+
+  /* background image */
+  background-image: url("images/ss_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.case-panel {
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #f2f2f2;
+}
+
+/* 2–3–2 case study gallery layout */
+.case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .gallery-row.row-2,
+  .gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.case-panel .case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.case-panel .case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* ================================
+   Neotype case study pages
+=================================== */
+
+.neo-case-page {
+  /* fallback color behind image */
+  background-color: #f3f4f6;
+
+  /* background image */
+  background-image: url("images/nt_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.neo-case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.neo-case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.neo-case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.neo-case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.neo-case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.neo-case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.neo-case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.neo-case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .neo-case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.neo-case-panel {
+  background-color: #ffffff79;
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.neo-case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.neo-case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.neo-case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.neo-case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.neo-case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .neo-case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .neo-case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.neo-case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.neo-case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #f2f2f2;
+}
+
+/* 2–3–2 case study gallery layout */
+.neo-case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.neo-gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.neo-gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.neo-gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.neo-gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .neo-gallery-row.row-2,
+  .neo-gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.neo-case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.neo-case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.neo-case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.neo-case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.neo-case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.neo-case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.neo-brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.neo-case-panel .neo-case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.neo-case-panel .neo-case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* ================================
+   WildBoar case study pages
+=================================== */
+
+.wild-case-page {
+  /* fallback color behind image */
+  background-color: #ffffff;
+
+  /* background image */
+  background-image: url("images/wildboar_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.wild-case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.wild-case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.wild-case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.wild-case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.wild-case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.wild-case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.wild-case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.wild-case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .wild-case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.wild-case-panel {
+  background-color: #ffffff;
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.wild-case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.wild-case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.wild-case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.wild-case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.wild-case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .wild-case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .wild-case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.wild-case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.wild-case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #ffd68f;
+}
+
+/* 2–3–2 case study gallery layout */
+.wild-case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.wild-gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.wild-gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.wild-gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.wild-gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .wild-gallery-row.row-2,
+  .wild-gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.wild-case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.wild-case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.wild-case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.wild-case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.wild-case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.wild-case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.wild-brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.wild-case-panel .wild-case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.wild-case-panel .wild-case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Smaller image size just for the Project Brief gallery */
+.wild-case-panel .wild-brief-gallery img {
+  max-width: 600px;   /* adjust this number to taste */
+  width: 100%;
+  height: auto;
+  margin-inline: auto;  /* centers it */
+}
+
+/* ================================
+   ABC case study pages
+=================================== */
+
+.abc-case-page {
+  /* fallback color behind image */
+  background-color: #254542;
+
+  /* background image */
+  background-image: url("images/abc_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.abc-case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.abc-case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: #9dcec2;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.abc-case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.abc-case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.abc-case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.abc-case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.abc-case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.abc-case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .abc-case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.abc-case-panel {
+  background-color: #76a39b;
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.abc-case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.abc-case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.abc-case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.abc-case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.abc-case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .abc-case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .abc-case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.abc-case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.abc-case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #f2f2f2;
+}
+
+/* 2–3–2 case study gallery layout */
+.abc-case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.abc-gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.abc-gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.abc-gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.abc-gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .abc-gallery-row.row-2,
+  .abc-gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.abc-case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.abc-case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.abc-case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.abc-case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.abc-case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.abc-case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.abc-brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.abc-case-panel .abc-case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.abc-case-panel .abc-case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Smaller image size just for the Project Brief gallery */
+.abc-case-panel .abc-brief-gallery img {
+  max-width: 800px;   /* adjust this number to taste */
+  width: 100%;
+  height: auto;
+  margin-inline: auto;  /* centers it */
+}
+
+/* ================================
+   No Limits case study pages
+=================================== */
+
+.nl-case-page {
+  /* fallback color behind image */
+  background-color: #f3f4f6;
+
+  /* background image */
+  background-image: url("images/nolimits_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.nl-case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.nl-case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.nl-case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.nl-case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.nl-case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.nl-case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.nl-case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.nl-case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .nl-case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.nl-case-panel {
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.nl-case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.nl-case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.nl-case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.nl-case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.nl-case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .nl-case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .nl-case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.nl-case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.nl-case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #f2f2f2;
+}
+
+/* 2–3–2 case study gallery layout */
+.nl-case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.nl-gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.nl-gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.nl-gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.nl-gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .nl-gallery-row.row-2,
+  .nl-gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.nl-case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.nl-case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.nl-case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.nl-case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.nl-case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.nl-case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.nl-brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.nl-case-panel .nl-case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nl-case-panel .nl-case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Smaller image size just for the Project Brief gallery */
+.nl-case-panel .nl-brief-gallery img {
+  max-width: 900px;   /* adjust this number to taste */
+  width: 100%;
+  height: auto;
+  margin-inline: auto;  /* centers it */
+}
+
+/* ================================
+   Quadrant case study pages
+=================================== */
+
+.quad-case-page {
+  /* fallback color behind image */
+  background-color: #f3f4f6;
+
+  /* background image */
+  background-image: url("images/quad_background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed; /* optional; you can remove if you don't like the effect */
+}
+
+.quad-case-article {
+  padding-block: var(--space-6);
+}
+
+/* Hero band */
+.quad-case-hero {
+  margin-top: 2rem;
+  margin-inline: 3.5rem;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  padding-block: var(--space-6);
+}
+
+.quad-case-hero-inner {
+  display: grid;
+  gap: var(--space-6);
+  padding-inline: var(--space-6);
+}
+
+.quad-case-hero-text .hero-text {
+  color: var(--color-text-muted);
+  max-width: 36rem;
+}
+
+.quad-case-meta {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.quad-case-meta dt {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.quad-case-meta dd {
+  margin: var(--space-1) 0 0;
+}
+
+/* Hero image */
+.quad-case-hero-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Two-column hero on large screens */
+@media (min-width: 900px) {
+  .quad-case-hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
+    align-items: center;
+  }
+}
+
+/* White rounded panels */
+.quad-case-panel {
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.quad-case-panel--narrow {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+/* Split layout (text + image) */
+.quad-case-panel--split {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.quad-case-panel-media img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+}
+
+/* Case gallery */
+.quad-case-gallery {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+}
+
+.quad-case-gallery img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Responsive tweaks */
+@media (min-width: 900px) {
+  .quad-case-panel--split {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+    align-items: center;
+  }
+
+  .quad-case-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Case Study: Small research image grid */
+.quad-case-panel-gallery {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  align-items: start;
+}
+
+.quad-case-panel-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  display: block;
+  background: #f2f2f2;
+}
+
+/* 2–3–2 case study gallery layout */
+.quad-case-panel-gallery-set {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-block: var(--space-4);
+}
+
+.quad-gallery-row {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.quad-gallery-row img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+}
+
+/* Row types */
+.quad-gallery-row.row-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.quad-gallery-row.row-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile adjustment (stack gracefully) */
+@media (max-width: 600px) {
+  .quad-gallery-row.row-2,
+  .quad-gallery-row.row-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Case study image grids */
+.quad-case-grid {
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center; /* centers each item */
+}
+
+/* 2–3–2 layout */
+.quad-case-grid.case-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.quad-case-grid.case-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Make images uniform */
+.quad-case-grid img {
+  width: 100%;
+  max-width: 200px;      /* controls uniform size */
+  height: 300px;         /* same height for all */
+  object-fit: cover;     /* crops (no distortion) */
+  border-radius: 0.75rem;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.15); /* subtle neutral border */
+}
+
+/* Horizontal gallery row for research images */
+.quad-case-row-gallery {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;   /* center the row */
+  align-items: center;
+  flex-wrap: wrap;           /* lets them wrap on small screens */
+  margin-top: var(--space-4);
+}
+
+.quad-case-row-gallery img {
+  width: 160px;              /* controls size */
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: block;
+}
+
+/* Larger images only for Project Brief */
+.quad-brief-gallery img {
+  width: 240px;
+  height: 300px;
+}
+
+/* Full-width images for the Design System gallery */
+.quad-case-panel .quad-case-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.quad-case-panel .quad-case-gallery img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Smaller image size just for the Project Brief gallery */
+.quad-case-panel .quad-brief-gallery img {
+  max-width: 800px;   /* adjust this number to taste */
+  width: 100%;
+  height: auto;
+  margin-inline: auto;  /* centers it */
+}
+
+/* ================================
+   Fullscreen Lightbox
+=================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;              /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 2rem;
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: 0.75rem;
+  object-fit: contain;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Close button (X) */
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.lightbox-close::before,
+.lightbox-close::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2rem;
+  height: 2px;
+  background: white;
+}
+
+.lightbox-close::before {
+  transform: rotate(45deg);
+}
+
+.lightbox-close::after {
+  transform: rotate(-45deg);
+}
+
+/* ================================
+   Footer
+=================================== */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  background-color: #f9fafb;
+  padding-block: var(--space-4);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.footer-nav {
+  list-style: none;
+  display: flex;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav a {
+  color: var(--color-text-muted);
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: var(--color-text);
+}
+
+@media (min-width: 640px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
