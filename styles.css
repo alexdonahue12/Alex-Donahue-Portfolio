@@ -1001,7 +1001,7 @@ textarea {
   background-color: #f3f4f6;
 
   /* background image */
-  background-image: url("images/ss_background.png");
+  background-image: url("images/ss_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1251,7 +1251,7 @@ textarea {
   background-color: #f3f4f6;
 
   /* background image */
-  background-image: url("images/nt_background.png");
+  background-image: url("images/nt_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1501,7 +1501,7 @@ textarea {
   background-color: #ffffff;
 
   /* background image */
-  background-image: url("images/wildboar_background.png");
+  background-image: url("images/wildboar_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1759,7 +1759,7 @@ textarea {
   background-color: #254542;
 
   /* background image */
-  background-image: url("images/abc_background.png");
+  background-image: url("images/abc_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -2017,7 +2017,7 @@ textarea {
   background-color: #f3f4f6;
 
   /* background image */
-  background-image: url("images/nolimits_background.png");
+  background-image: url("images/nolimits_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -2275,7 +2275,7 @@ textarea {
   background-color: #f3f4f6;
 
   /* background image */
-  background-image: url("images/quad_background.png");
+  background-image: url("images/quad_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
