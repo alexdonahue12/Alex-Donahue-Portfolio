@@ -2582,20 +2582,20 @@ textarea {
   transform: rotate(-45deg);
 }
 
-/* Reduce side padding on mobile */
 @media (max-width: 600px) {
   .container {
-    padding-inline: 1.25rem; /* smaller, cleaner mobile spacing */
+    padding-inline: 1.25rem;
   }
 
-  .hero {
-    margin-inline: 1.25rem; /* optional: shrink hero box margins too */
-  }
-
+  .hero,
   .case-hero,
   .neo-case-hero,
-  .wild-case-hero {
-    margin-inline: 1.25rem; /* keeps case study hero centered nicely */
+  .wild-case-hero,
+  .abc-case-hero,
+  .nolimits-case-hero,
+  .quad-case-hero {
+    margin-inline: 1.25rem;
+    margin-top: 1.5rem; /* optional: tighten top space a bit */
   }
 }
 
