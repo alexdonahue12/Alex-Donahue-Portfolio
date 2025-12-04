@@ -2609,7 +2609,10 @@ textarea {
   .hero,
   .case-hero,
   .neo-case-hero,
-  .wild-case-hero {
+  .wild-case-hero,
+  .abc-case-hero,
+  .nl-case-hero,
+  .quad-case-hero {
     margin-inline: 1.25rem;
   }
 }
