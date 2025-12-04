@@ -2601,11 +2601,11 @@ textarea {
 
 /* Reduce side margins on mobile */
 @media (max-width: 600px) {
+  /* already there */
   .container {
-    padding-inline: 1rem; /* smaller side padding */
+    padding-inline: 1rem;
   }
 
-  /* Optional: match hero & panel margins too */
   .hero,
   .case-hero,
   .neo-case-hero,
@@ -2613,7 +2613,14 @@ textarea {
   .abc-case-hero,
   .nl-case-hero,
   .quad-case-hero {
-    margin-inline: 1.25rem;
+    margin-inline: 1rem;
+  }
+
+  /* NEW: tighten inner padding for these three heroes */
+  .abc-case-hero-inner,
+  .nl-case-hero-inner,
+  .quad-case-hero-inner {
+    padding-inline: 1rem; /* or 1rem if you want it even tighter */
   }
 }
 
