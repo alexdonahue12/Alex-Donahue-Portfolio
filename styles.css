@@ -805,13 +805,7 @@ p {
 .project-grid {
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.project-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 /* Card container */
@@ -2603,6 +2597,21 @@ textarea {
   border-radius: 0.5rem;
   color: var(--color-text);
   font-size: var(--font-size-sm);
+}
+
+/* Reduce side margins on mobile */
+@media (max-width: 600px) {
+  .container {
+    padding-inline: 1rem; /* smaller side padding */
+  }
+
+  /* Optional: match hero & panel margins too */
+  .hero,
+  .case-hero,
+  .neo-case-hero,
+  .wild-case-hero {
+    margin-inline: 1.25rem;
+  }
 }
 
 /* ================================
