@@ -145,4 +145,32 @@
       if (e.key === "Escape") closeLightbox();
     });
   }
+  // =============================
+// Contact Form Success Message
+// =============================
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form.contact-form");
+  const thankyou = document.getElementById("contact-thankyou");
+
+  if (!form || !thankyou) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault(); // prevent default reload
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: { Accept: "application/json" }
+    });
+
+    if (response.ok) {
+      thankyou.hidden = false;   // show message
+      form.reset();              // clear form
+    } else {
+      alert("There was a problem sending your message. Please try again.");
+    }
+  });
+});
 })();

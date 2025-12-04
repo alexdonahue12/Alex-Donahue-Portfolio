@@ -50,13 +50,10 @@
       <div class="hero-content">
         <p class="eyebrow">Visual Communication Student</p>
 
-        <h1>Design work from my time at Concordia University Wisconsin.</h1>
+        <h1>Alex Donahue | Graphic Design Portfolio</h1>
 
         <p class="hero-text">
-          I’m a Visual Communication student focused on branding, typography,
-          and layout, creating design that blends clarity with creativity.
-          My work explores visual storytelling through thoughtful identity,
-          print, and editorial projects.
+          Design work from my time at Concordia University Wisconsin and The Milwaukee Institute of Art & Design.
         </p>
 
         <div class="hero-actions">
@@ -66,8 +63,8 @@
       </div>
 
       <div class="hero-portrait">
-        <img src="images/alex-portrait.webp"
-             alt="Portrait of Alex Donahue"
+        <img src="images/hero_img.jpg"
+             alt="Collage of Design Work"
              class="portrait-img">
       </div>
 
@@ -92,7 +89,7 @@
 
   <div class="project-overlay">
     <h3>Sleeve Stories</h3>
-    <p>Identity system for an album cover museum exhibit</p>
+    <p>Short-term identity system for an album cover museum exhibit</p>
   </div>
 </div>
 
@@ -117,8 +114,8 @@
          class="project-thumb">
 
     <div class="project-overlay">
-      <h3>Wild Boar one-page menu</h3>
-      <p>Branding-driven restaurant menu.</p>
+      <h3>Wild Boar</h3>
+      <p>BBQ themed one-page restaurant menu.</p>
       <a href="wildboar.html" class="project-link">View case study →</a>
     </div>
   </div>
@@ -132,8 +129,8 @@
          class="project-thumb">
 
     <div class="project-overlay">
-      <h3>Typeface Design</h3>
-      <p>Christmas ABC's book and poster</p>
+      <h3>Christmas ABC's</h3>
+      <p>Christmas themed custom typeface, book, and poster</p>
       <a href="abc.html" class="project-link">View case study →</a>
     </div>
   </div>
@@ -147,7 +144,7 @@
          class="project-thumb">
 
     <div class="project-overlay">
-      <h3>No Limits PlayStation brochure</h3>
+      <h3>No Limits</h3>
       <p>Editorial brochure celebrating PlayStation.</p>
       <a href="nolimits.html" class="project-link">View case study →</a>
     </div>
@@ -162,8 +159,8 @@
          class="project-thumb">
 
     <div class="project-overlay">
-      <h3>Quadrant Poster</h3>
-      <p>Josef Müller-Brockmann and Armin Hofmann</p>
+      <h3>Structure & Contrast</h3>
+      <p>Educational poster comparing Josef Müller-Brockmann and Armin Hofmann</p>
       <a href="quadrant.html" class="project-link">View case study →</a>
     </div>
   </div>
@@ -173,30 +170,35 @@
     </div>
   </section>
 
-  <!-- ================================
-     CONTACT SECTION (FORM + ASIDE)
+<!-- ================================
+   CONTACT SECTION (FORM + ASIDE)
 =================================== -->
-
 <section id="contact" class="section" aria-labelledby="contact-heading">
   <div class="container contact-layout">
 
     <!-- LEFT COLUMN -->
     <aside class="main-grid-sidebar contact-aside" aria-label="Additional contact information">
-
       <p class="eyebrow">Contact</p>
       <h1 id="contact-heading">Contact Alex Donahue</h1>
       <p class="page-intro">
         I’m currently open to new opportunities, collaborations, and design work. Use the contact
         form to get in touch — I’d love to hear from you.
       </p>
-
+      <p id="contact-thankyou" class="thankyou-message" hidden>
+  Thanks for your message — I’ll get back to you soon.
+</p>
     </aside>
 
     <!-- RIGHT COLUMN -->
     <div class="main-grid-primary">
       <h2 id="form-heading">Send a message</h2>
 
-      <form class="contact-form" action="#" method="post" novalidate>
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/mnnezqnb"
+        method="POST"
+      >
+
         <!-- Name -->
         <div class="form-field">
           <label for="name">
@@ -209,7 +211,7 @@
             autocomplete="name"
             required
             minlength="2"
-            aria-describedby="name-helper name-error"
+            aria-describedby="name-error"
           >
           <p id="name-error" class="field-error" aria-live="polite"></p>
         </div>
@@ -225,7 +227,7 @@
             type="email"
             autocomplete="email"
             required
-            aria-describedby="email-helper email-error"
+            aria-describedby="email-error"
           >
           <p id="email-error" class="field-error" aria-live="polite"></p>
         </div>
@@ -241,7 +243,7 @@
             rows="5"
             required
             minlength="10"
-            aria-describedby="message-helper message-error"
+            aria-describedby="message-error"
           ></textarea>
           <p id="message-error" class="field-error" aria-live="polite"></p>
         </div>
@@ -249,6 +251,7 @@
         <button class="btn btn-primary contact-submit" type="submit">
           Submit
         </button>
+
       </form>
     </div>
 

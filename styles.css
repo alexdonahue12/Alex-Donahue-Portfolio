@@ -685,6 +685,7 @@ p {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding-block: var(--space-6);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.05);
 
   /* Add space from edges of the screen */
   margin-inline: 3.5rem; /* increase to 2rem, 3rem, etc. */
@@ -708,7 +709,7 @@ p {
 }
 
 .hero-content {
-  max-width: 36rem;
+  max-width: 40rem;
 }
 
 .hero-text {
@@ -717,7 +718,7 @@ p {
 
 /* If you have a hero portrait column */
 .hero-portrait {
-  max-width: 22rem;
+  max-width: 50rem;
 }
 
 .hero-portrait .portrait-img {
@@ -917,6 +918,18 @@ p {
 .project-card:focus-within img.project-thumb {
   transform: scale(1.05);
   filter: brightness(0.6);
+}
+
+/* Larger overlay text on project cards */
+.project-overlay h3 {
+  font-size: 2.5rem;   /* was default ~1rem */
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+}
+
+.project-overlay p {
+  font-size: 0.95rem;  /* slightly larger */
+  line-height: 1.4;
 }
 
 /* ================================
@@ -2582,21 +2595,14 @@ textarea {
   transform: rotate(-45deg);
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding-inline: 1.25rem;
-  }
-
-  .hero,
-  .case-hero,
-  .neo-case-hero,
-  .wild-case-hero,
-  .abc-case-hero,
-  .nl-case-hero,
-  .quad-case-hero {
-    margin-inline: 1.25rem;
-    margin-top: 1.5rem; /* optional: tighten top space a bit */
-  }
+.thankyou-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-left: 3px solid var(--color-accent);
+  background: rgba(0,0,0,0.03);
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
 }
 
 /* ================================
