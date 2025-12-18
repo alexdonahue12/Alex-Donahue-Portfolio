@@ -12,11 +12,11 @@
 =================================== */
 :root {
   /* Colors */
-  --color-bg: #f7f7f9;
-  --color-surface: #ffffff;
-  --color-border: #e0e0e5;
-  --color-text: #141414;
-  --color-text-muted: #6b6b78;
+  --color-bg: #0d0d0d;
+  --color-surface: #000000;
+  --color-border: #3f3f3f;
+  --color-text: #ffffff;
+  --color-text-muted: #b6b6b6;
   --color-accent: hsl(0, 0%, 0%);
   --color-accent-soft: rgba(37, 99, 235, 0.08);
   --color-shadow-soft: rgba(15, 23, 42, 0.09);
@@ -379,304 +379,11 @@ p {
 }
 
 /* ================================
-   WildBoar nav
-=================================== */
-.wild-site-header {
-  position: relative; /* or just remove position entirely */
-  z-index: 500;
-  background-color: #9e4d4a;
-  backdrop-filter: blur(10px);
-}
-
-.wild-header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: var(--nav-height);
-}
-
-.wild-site-logo {
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  font-size: var(--font-size-md);
-  color: var(--color-text);
-  text-decoration: none;
-}
-
-/* Nav */
-.wild-site-nav {
-  display: none;
-}
-
-.wild-nav-list {
-  list-style: none;
-  display: flex;
-  gap: var(--space-4);
-  padding: 0;
-  margin: 0;
-}
-
-.wild-nav-list a {
-  font-size: var(--font-size-sm);
-  text-transform: lowercase;
-  color: #000000;
-  padding-block: var(--space-1);
-}
-
-.wild-nav-list a[aria-current="page"] {
-  color: var(--color-text);
-  font-weight: 600;
-  position: relative;
-}
-
-.wild-nav-list a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.15rem;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-text);
-}
-
-/* Mobile menu toggle */
-.wild-menu-toggle {
-  border-radius: 999px;
-  border: 1px solid var(--color-border);
-  padding: var(--space-2) var(--space-3);
-  background-color: #9e4d4a;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.wild-menu-icon {
-  width: 18px;
-  height: 2px;
-  background-color: var(--color-text);
-  border-radius: 999px;
-  position: relative;
-  transition: transform 0.18s ease, background-color 0.18s ease;
-}
-
-.wild-menu-icon::before,
-.menu-icon::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 18px;
-  height: 2px;
-  border-radius: 999px;
-  background-color: var(--color-text);
-  transition: transform 0.18s ease, top 0.18s ease, bottom 0.18s ease, opacity 0.18s ease;
-}
-
-.wild-menu-icon::before {
-  top: -5px;
-}
-
-.wild-menu-icon::after {
-  bottom: -5px;
-}
-
-.wild-menu-toggle.is-active .wild-menu-icon {
-  background-color: transparent;
-}
-
-.wild-menu-toggle.is-active .wild-menu-icon::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.wild-menu-toggle.is-active .wild-menu-icon::after {
-  bottom: 0;
-  transform: rotate(-45deg);
-}
-
-/* Mobile nav open */
-.wild-site-nav.is-open {
-  display: block;
-  margin-top: var(--space-3);
-}
-
-.wild-site-nav.is-open .wild-nav-list {
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-/* Desktop nav */
-@media (min-width: 768px) {
-  .wild-menu-toggle {
-    display: none;
-  }
-
-  .wild-site-nav {
-    display: block;
-  }
-
-  .wild-site-nav.is-open {
-    margin-top: 0;
-  }
-
-  .wild-nav-list {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-/* ================================
-   ABC nav
-=================================== */
-.abc-site-header {
-  position: relative; /* or just remove position entirely */
-  z-index: 500;
-  background-color: #254542;
-  backdrop-filter: blur(10px);
-}
-
-.abc-header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: var(--nav-height);
-}
-
-.abc-site-logo {
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  font-size: var(--font-size-md);
-  color: #ffffff;
-  text-decoration: none;
-}
-
-/* Nav */
-.abc-site-nav {
-  display: none;
-}
-
-.abc-nav-list {
-  list-style: none;
-  display: flex;
-  gap: var(--space-4);
-  padding: 0;
-  margin: 0;
-}
-
-.abc-nav-list a {
-  font-size: var(--font-size-sm);
-  text-transform: lowercase;
-  color: #000000;
-}
-
-.abc-nav-list a[aria-current="page"] {
-  color: var(--color-text);
-  font-weight: 600;
-  position: relative;
-}
-
-.abc-nav-list a[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -0.15rem;
-  width: 100%;
-  height: 1px;
-  background-color: var(--color-text);
-}
-
-/* Mobile menu toggle */
-.abc-menu-toggle {
-  border-radius: 999px;
-  border: 1px solid var(--color-border);
-  padding: var(--space-2) var(--space-3);
-  background-color: #254542;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.abc-menu-icon {
-  width: 18px;
-  height: 2px;
-  background-color: #254542;
-  border-radius: 999px;
-  position: relative;
-  transition: transform 0.18s ease, background-color 0.18s ease;
-}
-
-.abc-menu-icon::before,
-.menu-icon::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  width: 18px;
-  height: 2px;
-  border-radius: 999px;
-  background-color: var(--color-text);
-  transition: transform 0.18s ease, top 0.18s ease, bottom 0.18s ease, opacity 0.18s ease;
-}
-
-.abc-menu-icon::before {
-  top: -5px;
-}
-
-.abc-menu-icon::after {
-  bottom: -5px;
-}
-
-.abc-menu-toggle.is-active .abc-menu-icon {
-  background-color: transparent;
-}
-
-.abc-menu-toggle.is-active .abc-menu-icon::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.abc-menu-toggle.is-active .abc-menu-icon::after {
-  bottom: 0;
-  transform: rotate(-45deg);
-}
-
-/* Mobile nav open */
-.abc-site-nav.is-open {
-  display: block;
-  margin-top: var(--space-3);
-}
-
-.abc-site-nav.is-open .abc-nav-list {
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-/* Desktop nav */
-@media (min-width: 768px) {
-  .abc-menu-toggle {
-    display: none;
-  }
-
-  .abc-site-nav {
-    display: block;
-  }
-
-  .abc-site-nav.is-open {
-    margin-top: 0;
-  }
-
-  .abc-nav-list {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-/* ================================
    Hero
 =================================== */
 .hero {
   margin-top: 2rem; /* adjust to 3rem or 4rem if you want more */
-  background: #ffffff;
+  background: #161616;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding-block: var(--space-6);
@@ -1000,10 +707,9 @@ textarea {
 
 .case-page {
   /* fallback color behind image */
-  background-color: #f3f4f6;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/ss_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1018,7 +724,7 @@ textarea {
 .case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: var(--color-surface);
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -1073,7 +779,7 @@ textarea {
 
 /* White rounded panels */
 .case-panel {
-  background-color: var(--color-surface);
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -1250,10 +956,9 @@ textarea {
 
 .neo-case-page {
   /* fallback color behind image */
-  background-color: #f3f4f6;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/nt_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1268,7 +973,7 @@ textarea {
 .neo-case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: var(--color-surface);
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -1323,7 +1028,7 @@ textarea {
 
 /* White rounded panels */
 .neo-case-panel {
-  background-color: #ffffff79;
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -1350,7 +1055,7 @@ textarea {
 /* Case gallery */
 .neo-case-gallery {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-7);
   margin-top: var(--space-4);
 }
 
@@ -1484,7 +1189,7 @@ textarea {
 .neo-case-panel .neo-case-gallery {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-7);
 }
 
 .neo-case-panel .neo-case-gallery img {
@@ -1500,10 +1205,9 @@ textarea {
 
 .wild-case-page {
   /* fallback color behind image */
-  background-color: #ffffff;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/wildboar_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1518,7 +1222,7 @@ textarea {
 .wild-case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: #ffffff;
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -1573,7 +1277,7 @@ textarea {
 
 /* White rounded panels */
 .wild-case-panel {
-  background-color: #ffffff;
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -1758,10 +1462,9 @@ textarea {
 
 .abc-case-page {
   /* fallback color behind image */
-  background-color: #eef8f7;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/abc_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -1776,7 +1479,7 @@ textarea {
 .abc-case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: #ffffff;
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -1831,7 +1534,7 @@ textarea {
 
 /* White rounded panels */
 .abc-case-panel {
-  background-color: #ffffff;
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -1992,7 +1695,7 @@ textarea {
 .abc-case-panel .abc-case-gallery {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-7);
 }
 
 .abc-case-panel .abc-case-gallery img {
@@ -2016,10 +1719,9 @@ textarea {
 
 .nl-case-page {
   /* fallback color behind image */
-  background-color: #f3f4f6;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/nolimits_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -2034,7 +1736,7 @@ textarea {
 .nl-case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: var(--color-surface);
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -2089,7 +1791,7 @@ textarea {
 
 /* White rounded panels */
 .nl-case-panel {
-  background-color: var(--color-surface);
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -2250,7 +1952,7 @@ textarea {
 .nl-case-panel .nl-case-gallery {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-7);
 }
 
 .nl-case-panel .nl-case-gallery img {
@@ -2274,10 +1976,9 @@ textarea {
 
 .quad-case-page {
   /* fallback color behind image */
-  background-color: #f3f4f6;
+  background-color: #000000;
 
   /* background image */
-  background-image: url("images/quad_background.webp");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -2292,7 +1993,7 @@ textarea {
 .quad-case-hero {
   margin-top: 0rem;
   margin-inline: 3.5rem;
-  background: var(--color-surface);
+  background: #161616;
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-soft);
@@ -2347,7 +2048,7 @@ textarea {
 
 /* White rounded panels */
 .quad-case-panel {
-  background-color: var(--color-surface);
+  background-color: #161616;
   border-radius: 1.5rem;
   padding: var(--space-5);
   border: 1px solid var(--color-border);
@@ -2534,7 +2235,7 @@ textarea {
 .quad-case-article {
   padding-top: 0;
   /* keep the bottom spacing */
-  padding-bottom: var(--space-6);
+  padding-bottom: var(--space-1);
 }
 
 /* ================================
@@ -2635,8 +2336,13 @@ textarea {
 .abc-case-page .site-main,
 .nl-case-page .site-main,
 .quad-case-page .site-main,
-.wild-case-page .site-main {
+.wild-case-page .site-main{
   padding-top: 0;
+}
+
+/* About page: tighten gap between header and hero */
+.about-page .hero {
+  margin-top: 0rem; /* try 0.5rem–1rem */
 }
 
 /* ================================
