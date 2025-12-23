@@ -2354,7 +2354,7 @@ textarea {
 .case-video {
   position: relative;
   width: 100%;
-  max-width: 1000px;   /* optional */
+  max-width: 1200px;   /* optional */
   margin: 0 auto;
   aspect-ratio: 16 / 9;
 }
