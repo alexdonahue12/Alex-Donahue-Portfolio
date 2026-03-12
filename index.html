@@ -1,227 +1,294 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Art Portfolio | Alex Donahue</title>
-  <meta name="description" content="Art portfolio featuring paintings, drawings, and series work." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Vesper+Libre:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Favicons -->
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="AD Art" />
-<link rel="manifest" href="/site.webmanifest" />
+  <meta charset="UTF-8">
+  <title>Graphic Design Portfolio | Alex Donahue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Alex Donahue, a Visual Communication student at Concordia University Wisconsin showcasing graphic design, branding, layout, and motion graphics projects.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-  <nav class="site-nav" aria-label="Primary">
+<header class="site-header" role="banner">
+  <div class="container header-inner">
 
-    <a class="brand brand--solo" href="index.html" aria-label="Home">
-      <span class="brand-mark">
-        <img src="images/monogram_gold.svg" alt="Alex Donahue monogram"/>
-      </span>
-    </a>
+    <a href="index.html" class="site-logo">Alex Donahue</a>
 
-    <a class="nav-link" href="#work">Work</a>
-    <a class="nav-link" href="#about">About</a>
-    <a class="nav-link" href="#contact">Contact</a>
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      type="button"
+      aria-label="Toggle navigation menu"
+      aria-controls="primary-nav"
+      aria-expanded="false"
+    >
+      <span class="menu-icon" aria-hidden="true"></span>
+    </button>
 
-  </nav>
-</div>
-  </header>
-
-  <main id="main">
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-  <img
-    class="hero-monogram"
-    src="images/monogram_gold.svg"
-    alt="Alex Donahue monogram"
-    width="140"
-    height="140"
-    loading="eager"
-  />
-
-  <h1 class="hero-title">Paintings, drawings, and series work.</h1>
-  <p class="hero-subtitle">
-    A focused art portfolio with clear series pages, materials, and process.
-  </p>
-
-  <div class="hero-actions">
-    <a class="btn" href="#work">View work</a>
-    <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    <nav
+      class="site-nav"
+      id="primary-nav"
+      role="navigation"
+      aria-label="Primary navigation"
+    >
+      <ul class="nav-list">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </div>
- </div>
-</div>
-    </section>
+</header>
 
-    <section id="work" class="section">
-      <div class="container section-head">
-        <h2 class="section-title">Selected Work</h2>
+<main id="main-content">
 
+  <section class="hero">
+    <div class="container hero-inner">
+
+      <div class="hero-content">
+        <p class="eyebrow">Visual Communication Student</p>
+
+        <h1>Alex Donahue | Graphic Design Portfolio</h1>
+
+        <p class="hero-text">
+          Design work from my time at Concordia University Wisconsin and The Milwaukee Institute of Art & Design.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View selected work</a>
+          <a class="btn btn-ghost" href="about.html">About me</a>
+        </div>
       </div>
 
-      <div class="container grid">
-        <!-- Card 1 -->
-        <article class="card">
-  <a class="card-link" href="pantocrator.html">
-    <div class="card-media">
-      <img src="images/pantocrator_thumb.webp" alt="Christ Pantocrator study painting." />
-      <h3 class="card-title">Christ Pantocrator</h3>
+      <div class="hero-portrait">
+        <img src="images/hero_img.jpg"
+             alt="Collage of Design Work"
+             class="portrait-img">
+      </div>
+
     </div>
-  </a>
-</article>
+  </section>
 
-        <!-- Card 2 -->
-        <article class="card">
-          <a class="card-link" href="heavenandhell.html">
-            <div class="card-media">
-              <img src="images/heaven-and-hell.webp" alt="Heaven and Hell study painting." />
-              <h3 class="card-title">Heaven and Hell</h3>
-            </div>
-          </a>
-        </article>
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Selected design projects</h2>
+      <p class="section-intro">Coursework in identity design, typography, layout, and print.</p>
 
-        <!-- Card 3 -->
-        <article class="card">
-          <a class="card-link" href="goodshephard.html">
-            <div class="card-media">
-              <img src="images/jesuslamb_thumb.webp" alt="Good Shepherd painting" />
-              <h3 class="card-title">Good Shepherd</h3>
-            </div>
-          </a>
-        </article>
+<div class="project-grid">
+  <!-- ================================
+     Sleeve Stories
+  =================================== -->
+  <div class="project-card">
+  <a href="sleevestories.html" class="project-link"></a>
 
-        <!-- Card 4 -->
-        <article class="card">
-          <a class="card-link" href="president.html">
-            <div class="card-media">
-              <img src="images/reagan.webp" alt="Portraits of Presidents" />
-              <h3 class="card-title">Presidential Portraits</h3>
-            </div>
-          </a>
-        </article>
+  <img src="images/sleevestories_mockup.webp"
+       alt="Sleeve Stories exhibit identity"
+       class="project-thumb">
 
-        <!-- Card 5 -->
-        <article class="card">
-          <a class="card-link" href="expressive.html">
-            <div class="card-media">
-              <img src="images/e13.webp" alt="Expressive portrait study" />
-              <h3 class="card-title">Expressive Portraits</h3>
-            </div>
-          </a>
-        </article>
+  <div class="project-overlay">
+    <h3>Sleeve Stories</h3>
+    <p>Short-term identity system for an album cover museum exhibit</p>
+  </div>
+</div>
 
-        <!-- Add more cards as needed -->
+  <!-- ================================
+     NeoType: Orbitron type specimen
+  =================================== -->
+  <div class="project-card">
+  <img src="images/orbitron.webp" class="project-thumb">
+  <div class="project-overlay">
+    <h3>NeoType</h3>
+    <p>Type Specimen Book</p>
+    <a href="neotype.html" class="project-link">View case study →</a>
+  </div>
+</div>
+
+  <!-- ================================
+     Wild Boar one-page menu
+  =================================== -->
+  <div class="project-card">
+    <img src="images/wildboar.webp" class="project-thumb"
+         alt="Wild Boar BBQ restaurant menu"
+         class="project-thumb">
+
+    <div class="project-overlay">
+      <h3>Wild Boar</h3>
+      <p>BBQ themed one-page restaurant menu.</p>
+      <a href="wildboar.html" class="project-link">View case study →</a>
+    </div>
+  </div>
+
+    <!-- ================================
+     Christmas ABC book
+  =================================== -->
+  <div class="project-card">
+    <img src="images/abc.webp" class="project-thumb"
+         alt="Christmas ABC book and poster"
+         class="project-thumb">
+
+    <div class="project-overlay">
+      <h3>Christmas ABC's</h3>
+      <p>Christmas themed custom typeface, book, and poster</p>
+      <a href="abc.html" class="project-link">View case study →</a>
+    </div>
+  </div>
+
+  <!-- ================================
+     No Limits PlayStation brochure
+  =================================== -->
+  <div class="project-card">
+    <img src="images/NoLimits.webp" class="project-thumb"
+         alt="No Limits PlayStation brochure"
+         class="project-thumb">
+
+    <div class="project-overlay">
+      <h3>No Limits</h3>
+      <p>Editorial brochure celebrating PlayStation.</p>
+      <a href="nolimits.html" class="project-link">View case study →</a>
+    </div>
+  </div>
+
+    <!-- ================================
+     Design Poster
+  =================================== -->
+  <div class="project-card">
+    <img src="images/poster.webp" class="project-thumb"
+         alt="Quadrant Poster"
+         class="project-thumb">
+
+    <div class="project-overlay">
+      <h3>Structure & Contrast</h3>
+      <p>Educational poster comparing Josef Müller-Brockmann and Armin Hofmann</p>
+      <a href="quadrant.html" class="project-link">View case study →</a>
+    </div>
+  </div>
+
+    <!-- ================================
+     Matrix
+  =================================== -->
+      <div class="project-card">
+        <a href="matrix.html" class="project-link">View case study →</a>
+        <img src="images/matrix_1.webp" alt="Matrix Kinetic Type" class="project-thumb">
+        <div class="project-overlay">
+          <h3>Matrix Kinetic Type</h3>
+          <p>Kinetic type motion graphics inspired by the Matrix film series</p>
+        </div>
       </div>
-    </section>
+    </div><!-- /project-grid -->
+  </div><!-- /container -->
+</section>
 
-<section id="about" class="section section-dark">
-  <div class="container two-col">
+<!-- ================================
+   CONTACT SECTION (FORM + ASIDE)
+=================================== -->
+<section id="contact" class="section" aria-labelledby="contact-heading">
+  <div class="container contact-layout">
 
     <!-- LEFT COLUMN -->
-    <div class="about-main">
-      <h2 class="section-title">About</h2>
-
-      <p class="lead">
-        Alex Donahue is an artist based in Southeast Wisconsin whose work centers on 
-        painting, disciplined drawing, and material study. Grounded in close observation 
-        and careful construction, his practice emphasizes how surface, scale, and medium 
-        shape visual meaning. Working primarily in oil, acrylic, and graphite, he develops 
-        each piece through preparatory studies, compositional testing, and refinement 
-        before committing to its finished form. His work engages traditional and 
-        figurative modes, drawing on historical approaches to image-making while remaining 
-        attentive to clarity, hierarchy, and visual presence.
+    <aside class="main-grid-sidebar contact-aside" aria-label="Additional contact information">
+      <p class="eyebrow">Contact</p>
+      <h1 id="contact-heading">Contact Alex Donahue</h1>
+      <p class="page-intro">
+        I’m currently open to new opportunities, collaborations, and design work. Use the contact
+        form to get in touch — I’d love to hear from you.
       </p>
-
-      <p>
-        He is currently completing a degree in Visual Communication (Graphic Design) at 
-        Concordia University Wisconsin, graduating in 2026. Alongside his academic studies, 
-        Donahue continues to build a body of painting and drawing intended for large-scale 
-        and architectural contexts, with a focus on technical rigor and long-term 
-        durability.
+      <p class="page-intro">
+        You can contact me using the form or via my email:
       </p>
-
-      <!-- FACTS CARD MOVED HERE -->
-      <div class="about-card" aria-label="Quick facts">
-        <div class="about-row">
-          <span class="label">Location</span>
-          <span class="value">SE Wisconsin</span>
-        </div>
-        <div class="about-row">
-          <span class="label">Focus</span>
-          <span class="value">Painting • Drawing</span>
-        </div>
-        <div class="about-row">
-          <span class="label">Tools</span>
-          <span class="value">Oil • Acrylic • Graphite</span>
-        </div>
-      </div>
-    </div>
+      <p class="page-intro">
+        alexjdonahue@charter.net
+      </p>
+      <p id="contact-thankyou" class="thankyou-message" hidden>
+  Thanks for your message — I’ll get back to you soon.
+</p>
+    </aside>
 
     <!-- RIGHT COLUMN -->
-    <aside class="about-side">
-      <figure class="about-portrait">
-        <img
-          src="images/Donahue_Headshot.webp"
-          alt="Portrait of Alex Donahue"
-          loading="lazy"
-        />
-      </figure>
-    </aside>
+    <div class="main-grid-primary">
+      <h2 id="form-heading">Send a message</h2>
+
+      <form
+        class="contact-form"
+        action="https://formspree.io/f/mnnezqnb"
+        method="POST"
+      >
+
+        <!-- Name -->
+        <div class="form-field">
+          <label for="name">
+            Name <span class="required-indicator">(required)</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            minlength="2"
+            aria-describedby="name-error"
+          >
+          <p id="name-error" class="field-error" aria-live="polite"></p>
+        </div>
+
+        <!-- Email -->
+        <div class="form-field">
+          <label for="email">
+            Email <span class="required-indicator">(required)</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            aria-describedby="email-error"
+          >
+          <p id="email-error" class="field-error" aria-live="polite"></p>
+        </div>
+
+        <!-- Message -->
+        <div class="form-field">
+          <label for="message">
+            Message <span class="required-indicator">(required)</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+            minlength="10"
+            aria-describedby="message-error"
+          ></textarea>
+          <p id="message-error" class="field-error" aria-live="polite"></p>
+        </div>
+
+        <button class="btn btn-primary contact-submit" type="submit">
+          Submit
+        </button>
+
+      </form>
+    </div>
 
   </div>
 </section>
 
-    <section id="contact" class="section">
-      <div class="container contact">
-        <h2 class="section-title">Contact</h2>
-        <p class="lead">For commissions, collaborations, or portfolio reviews.</p>
+</main>
 
-        <!-- Replace with a real form handler later -->
-        <form class="form" action="#" method="post">
-          <label class="field">
-            <span>Name</span>
-            <input type="text" name="name" autocomplete="name" />
-          </label>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>Alex Donahue</p>
+    <nav aria-label="Footer navigation">
+      <ul class="footer-nav">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
 
-          <label class="field">
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" />
-          </label>
-
-          <label class="field">
-            <span>Message</span>
-            <textarea name="message" rows="5"></textarea>
-          </label>
-
-          <button class="btn" type="submit">Send</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <small>© <span id="year">2026</span> Alex Donahue</small>
-      <small class="footer-links">
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </small>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
