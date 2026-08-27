@@ -1084,6 +1084,42 @@ textarea {
   }
 }
 
+/* ================================
+   NeoType: framed spread presentation
+   Single column at every width — spreads stay
+   legible instead of shrinking to fit 2-up.
+   Each spread gets a consistent light matting,
+   shadow, and caption so flat InDesign exports
+   read as a deliberate presentation rather than
+   raw screenshots.
+=================================== */
+.neo-case-gallery--spreads {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+.spread-frame {
+  margin: 0;
+}
+
+.spread-frame img {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+}
+
+.spread-caption {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
 /* Case Study: Small research image grid */
 .neo-case-panel-gallery {
   display: grid;
@@ -2407,4 +2443,88 @@ textarea {
     justify-content: space-between;
     align-items: center;
   }
+}
+/* ================================
+   Sleeve Stories: video in case gallery
+   (fixes ss_motion.mp4, which was previously
+   in a broken <img> tag)
+=================================== */
+.case-panel .case-gallery video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #000;
+}
+
+/* Simple list styling to match case-panel prose
+   (used for the Sleeve Stories deliverables list) */
+.case-panel .case-list {
+  margin: 0 0 var(--space-3);
+  padding-left: 1.25rem;
+  color: var(--color-text);
+}
+
+.case-panel .case-list li {
+  margin-bottom: var(--space-1);
+}
+
+/* ================================
+   Sleeve Stories: process image layout
+   - Paired images (concept/logo, moodboard/rules):
+     always exactly 2 items, so they divide evenly
+     at every screen width — no orphaned single image.
+   - Sketch grid: fixed column count instead of
+     flex-wrap, so it doesn't reflow unpredictably
+     between breakpoints.
+=================================== */
+.process-subhead {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-md);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.process-media-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.process-media-row img {
+  height: 280px;
+  width: auto;
+  max-width: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 600px) {
+  .process-media-row img {
+    height: 200px;
+  }
+}
+
+.process-sketch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 170px));
+  gap: var(--space-3);
+  justify-content: center;
+}
+
+.process-sketch-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
