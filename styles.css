@@ -379,34 +379,18 @@ p {
 }
 
 /* ================================
-   Hero
+   Hero — centered text only, no image, no card box
 =================================== */
 .hero {
-  margin-top: 2rem; /* adjust to 3rem or 4rem if you want more */
-  background: #161616;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  margin-top: 2rem;
   padding-block: var(--space-6);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.05);
-
-  /* Add space from edges of the screen */
-  margin-inline: 3.5rem; /* increase to 2rem, 3rem, etc. */
 }
 
 .hero-inner {
-  display: grid;
-  gap: var(--space-6);
-}
-
-/* Side-by-side layout on desktop */
-@media (min-width: 900px) {
-  .hero-inner {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
-}
-
-.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding-inline: var(--space-6);
 }
 
@@ -418,35 +402,11 @@ p {
   color: var(--color-text-muted);
 }
 
-/* If you have a hero portrait column */
-.hero-portrait {
-  max-width: 50rem;
-}
-
-.hero-portrait .portrait-img {
-  border-radius: var(--radius-lg);
-}
-
-.hero-portrait img {
-  max-width: 100%;
-  width: 100%;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-}
-
-/* Two-column hero on wider screens */
-@media (min-width: 900px) {
-  .hero-inner {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-    align-items: center;
-  }
-}
-
-/* Reverse layout for About hero on desktop */
-@media (min-width: 900px) {
-  .about-hero-inner {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  }
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 /* ================================
@@ -2480,13 +2440,14 @@ textarea {
      between breakpoints.
 =================================== */
 .process-subhead {
-  margin-top: var(--space-5);
-  margin-bottom: var(--space-2);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-3);
   font-size: var(--font-size-md);
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
+  text-align: center;
 }
 
 .process-media-row {
@@ -2527,4 +2488,52 @@ textarea {
   display: block;
   border-radius: var(--radius-md);
   border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/* ================================
+   Remove bounding boxes: case-study heroes + panels
+=================================== */
+.case-hero,
+.neo-case-hero,
+.wild-case-hero,
+.abc-case-hero,
+.nl-case-hero,
+.quad-case-hero,
+.case-panel,
+.neo-case-panel,
+.wild-case-panel,
+.abc-case-panel,
+.nl-case-panel,
+.quad-case-panel {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+/* Restore full original panel styling on panels marked --bordered (e.g. Project Brief) */
+.case-panel--bordered,
+.neo-case-panel--bordered,
+.wild-case-panel--bordered,
+.abc-case-panel--bordered,
+.nl-case-panel--bordered,
+.quad-case-panel--bordered {
+  background-color: #161616;
+  border-radius: 1.5rem;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+/* About page: small circular portrait above the text */
+.about-hero-inner .hero-portrait {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto var(--space-4);
+}
+
+.about-hero-inner .hero-portrait .portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
