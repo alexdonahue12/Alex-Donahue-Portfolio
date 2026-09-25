@@ -60,9 +60,9 @@
           <h1 id="mural-heading">MuralWalk: A Public Art Discovery App</h1>
           <p class="hero-text">
             MuralWalk is a mobile app concept designed and prototyped in
-            Figma that helps people discover public art in their city —
+            Figma that helps people discover public art in their city,
             murals, sculptures, and installations alike. Public art is
-            usually experienced by accident — MuralWalk turns it into
+            usually experienced by accident. MuralWalk turns it into
             something intentional: browse a map of nearby pieces, learn
             about each one and its artist, save favorites, and build a
             walking route connecting several pieces into one trip, complete
@@ -100,26 +100,32 @@
       <div class="container">
         <div class="case-panel case-panel--bordered">
           <h2>Project brief</h2>
-          <p>
-            This was a self-directed project, built to demonstrate digital
-            product thinking alongside my print and identity work. I set
-            my own brief: someone walking around a neighborhood has no easy
-            way to know a piece of public art is nearby, who made it, or
-            what it means — it's usually stumbled upon, if it's seen at
-            all. I wanted to design an app that turns that into something
-            deliberate, closer to how people already use a map app to
-            plan a trip.
-          </p>
-          <p>
-            I chose this concept specifically because it connects to my own
-            interest in mural and public art — that gave the project a real
-            point of view to design around, rather than an arbitrary
-            assignment brief. It also let me pair something I already do
-            well (an identity system, built around a hand-lettered wordmark
-            and a color palette pulled directly from real mural photography)
-            with something I hadn't done before: designing and prototyping
-            an actual app flow, not just a static screen.
-          </p>
+          <div class="mw-interaction-layout">
+            <div class="mw-interaction-text">
+              <p>
+                This was a self-directed project, built to demonstrate digital
+                product thinking alongside my print and identity work. I set
+                my own brief: someone walking around a neighborhood has no easy
+                way to know a piece of public art is nearby, who made it, or
+                what it means. It's usually stumbled upon, if it's seen at
+                all. I wanted to design an app that turns that into something
+                deliberate, closer to how people already use a map app to
+                plan a trip.
+              </p>
+            </div>
+            <div class="mw-video-wrap">
+              <video
+                src="images/mw_vid.mp4"
+                class="mw-prototype-video"
+                muted
+                loop
+                autoplay
+                playsinline
+                aria-label="MuralWalk prototype demo: tapping a mural pin, dragging the overlay open, and building a multi-stop route"
+              ></video>
+              <p class="spread-caption">Prototype demo — pin tap, drag-to-expand, and route building</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -153,55 +159,6 @@
       </div>
     </section>
 
-    <!-- INTERACTION / PROTOTYPE -->
-    <section class="section">
-      <div class="container">
-        <div class="case-panel case-panel--bordered">
-          <h2>Interaction &amp; prototyping</h2>
-          <div class="mw-interaction-layout">
-            <div class="mw-interaction-text">
-              <p>
-                The map screen was the most involved piece of the project.
-                Tapping a pin opens a bottom sheet that can be dragged up or
-                down to reveal more or less detail — the same pattern real map
-                apps use to keep a place preview and the map itself visible at
-                once. That drag behavior is built with Smart Animate across
-                collapsed, mid, and fully expanded states of the same card.
-              </p>
-              <p>
-                Building a route works the same way real map apps handle
-                multi-stop trips: tapping "Create route" on a piece, then
-                adding more stops directly from the map, updates a running
-                stop count and recalculates total walking time and distance as
-                you go. Under the hood, that's driven by a Figma variable bound
-                to the map component's variant property, so tapping a button
-                nested inside the overlay can swap the map to its route-line
-                state without navigating away from the screen — the map and the
-                overlay update together, in place. Starting a route hands off
-                to an active navigation screen with turn-by-turn instructions,
-                arrival time, remaining distance, and the next stop on the
-                route, closing the loop from discovery all the way to actually
-                walking there.
-              </p>
-            </div>
-            <div class="mw-video-wrap">
-              <video
-                src="images/mw_vid.mp4"
-                class="mw-prototype-video"
-                controls
-                muted
-                loop
-                autoplay
-                playsinline
-                aria-label="MuralWalk prototype demo: tapping a mural pin, dragging the overlay open, and building a multi-stop route"
-              ></video>
-              <p class="spread-caption">Prototype demo — pin tap, drag-to-expand, and route building</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- REFLECTION -->
     <section class="section">
       <div class="container">
@@ -209,7 +166,7 @@
           <h2>What this project demonstrates</h2>
           <p>
             MuralWalk was built specifically to extend my design work into
-            digital product thinking — information architecture (how a
+            digital product thinking, information architecture (how a
             mural, its artist, and a multi-stop route relate to each
             other), interaction design (a draggable bottom sheet, a
             variable-driven map state), and a lightweight brand system
