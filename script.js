@@ -1,176 +1,153 @@
-// script.js
+/* Fullscreen viewer for case study pages.
+   Click (or press Enter on) any image or looping video to open it. Esc, the
+   close button, or a click outside the media closes it. Arrow keys, the arrow
+   buttons, or a swipe move between the items on the page.
+   Videos that have their own player controls (like the Matrix animation) are
+   left alone, since a click on them already plays and pauses.
+   This file carries its own styles, so it doesn't depend on styles.css. */
 (function () {
-  document.addEventListener("DOMContentLoaded", function () {
-    var body = document.body;
-    var menuToggle = document.getElementById("menu-toggle");
-    var primaryNav = document.getElementById("primary-nav");
-    var siteHeader = document.querySelector(".site-header");
+  var items = Array.prototype.slice.call(
+    document.querySelectorAll('.case-hero img, .media img, .media video:not([controls])')
+  );
+  if (!items.length || typeof HTMLDialogElement === 'undefined') return;
 
-    if (!menuToggle || !primaryNav) {
-      return;
-    }
+  var css =
+    '.case-hero img,.media img,.media video:not([controls]){cursor:zoom-in}' +
+    '.viewer{position:fixed;inset:0;width:100vw;height:100vh;height:100dvh;max-width:none;max-height:none;' +
+      'margin:0;padding:0;border:0;overflow:hidden;background:#111010;color:#f4ede2}' +
+    '.viewer[open]{display:flex;align-items:center;justify-content:center}' +
+    '.viewer::backdrop{background:transparent}' +
+    /* images: shown at their own size, shrunk to fit with margin around them */
+    '.viewer__img{display:block;width:auto;height:auto;max-width:88vw;max-height:84vh;max-height:84dvh;' +
+      'object-fit:contain;border-radius:12px;cursor:zoom-out}' +
+    /* videos: scaled to fill the same box, letterboxed inside it */
+    '.viewer__video{display:block;width:88vw;height:84vh;height:84dvh;object-fit:contain;' +
+      'background:transparent;cursor:zoom-out}' +
+    '.viewer__btn{position:fixed;display:grid;place-items:center;width:48px;height:48px;padding:0 0 4px;' +
+      'border:0;border-radius:50%;background:rgba(244,237,226,.14);color:#f4ede2;font:inherit;' +
+      'font-size:32px;line-height:1;cursor:pointer}' +
+    '.viewer__btn:hover{background:rgba(244,237,226,.28)}' +
+    '.viewer__close{top:16px;right:16px}' +
+    '.viewer__nav{top:50%;transform:translateY(-50%)}' +
+    '.viewer__prev{left:16px}.viewer__next{right:16px}';
+  var style = document.createElement('style');
+  style.textContent = css;
+  document.head.appendChild(style);
 
-    var lastFocusBeforeOpen = null;
+  var dialog = document.createElement('dialog');
+  dialog.className = 'viewer';
+  dialog.setAttribute('aria-label', 'Media viewer');
+  dialog.innerHTML =
+    '<button class="viewer__btn viewer__close" type="button" aria-label="Close">&times;</button>' +
+    '<button class="viewer__btn viewer__nav viewer__prev" type="button" aria-label="Previous">&#8249;</button>' +
+    '<img class="viewer__img" alt="">' +
+    '<video class="viewer__video" muted loop playsinline></video>' +
+    '<button class="viewer__btn viewer__nav viewer__next" type="button" aria-label="Next">&#8250;</button>';
+  document.body.appendChild(dialog);
 
-    function getHeaderOffset() {
-      if (!siteHeader) return 0;
-      return siteHeader.offsetHeight || 0;
-    }
+  var bigImg = dialog.querySelector('.viewer__img');
+  var bigVideo = dialog.querySelector('.viewer__video');
+  var prev = dialog.querySelector('.viewer__prev');
+  var next = dialog.querySelector('.viewer__next');
+  var current = 0;
+  var opener = null;
 
-    function openMenu() {
-      lastFocusBeforeOpen = document.activeElement;
-      body.classList.add("nav-open");
-      primaryNav.classList.add("is-open");
-      menuToggle.classList.add("is-active");
-      menuToggle.setAttribute("aria-expanded", "true");
-    }
-
-    function closeMenu(options) {
-      var opts = options || {};
-      body.classList.remove("nav-open");
-      primaryNav.classList.remove("is-open");
-      menuToggle.classList.remove("is-active");
-      menuToggle.setAttribute("aria-expanded", "false");
-
-      if (opts.returnFocus !== false && menuToggle) {
-        menuToggle.focus();
-      }
-    }
-
-    function isMenuOpen() {
-      return body.classList.contains("nav-open");
-    }
-
-    // Toggle button click
-    menuToggle.addEventListener("click", function () {
-      if (isMenuOpen()) {
-        closeMenu({ returnFocus: true });
-      } else {
-        openMenu();
-      }
-    });
-
-    // Close menu when a nav link is activated
-    primaryNav.addEventListener("click", function (event) {
-      var target = event.target;
-      if (!(target instanceof Element)) return;
-
-      var link = target.closest("a");
-      if (!link) return;
-
-      // Close menu and return focus to toggle
-      if (isMenuOpen()) {
-        closeMenu({ returnFocus: true });
-      }
-    });
-
-    // Close on Escape and return focus to toggle
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" || event.key === "Esc") {
-        if (isMenuOpen()) {
-          event.preventDefault();
-          closeMenu({ returnFocus: true });
-        }
-      }
-    });
-
-    // Smooth scroll for same-page anchors with offset for fixed header
-    var anchorLinks = document.querySelectorAll('a[href^="#"]:not(.skip-link)');
-    anchorLinks.forEach(function (anchor) {
-      anchor.addEventListener("click", function (event) {
-        var href = anchor.getAttribute("href");
-        if (!href || href === "#") return;
-
-        var targetId = href.slice(1);
-        var targetEl = document.getElementById(targetId);
-        if (!targetEl) return;
-
-        event.preventDefault();
-
-        var headerOffset = getHeaderOffset() + 8; // small extra offset
-        var rect = targetEl.getBoundingClientRect();
-        var targetY = rect.top + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: targetY,
-          behavior: "smooth",
-        });
-
-        // Optionally move focus to the target for accessibility
-        targetEl.setAttribute("tabindex", "-1");
-        targetEl.focus({ preventScroll: true });
-      });
-    });
-  });
-      // ----------------------------
-  // Fullscreen Lightbox
-  // ----------------------------
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const lightboxClose = document.querySelector(".lightbox-close");
-
-  // Only set up if the markup exists on this page
-  if (lightbox && lightboxImg && lightboxClose) {
-    function openLightbox(src, alt = "") {
-      lightboxImg.src = src;
-      lightboxImg.alt = alt;
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove("is-open");
-      lightbox.setAttribute("aria-hidden", "true");
-      lightboxImg.src = "";
-      lightboxImg.alt = "";
-    }
-
-    // Click-to-open: any image with .js-lightbox on ANY page
-    document.addEventListener("click", function (e) {
-      const img = e.target.closest(".js-lightbox");
-      if (!img) return;
-      openLightbox(img.src, img.alt || "");
-    });
-
-    // Close button
-    lightboxClose.addEventListener("click", closeLightbox);
-
-    // Click outside image closes
-    lightbox.addEventListener("click", function (e) {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // ESC closes
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeLightbox();
-    });
+  // Set display directly so no other stylesheet can override it
+  function setShown(el, shown) {
+    el.style.display = shown ? '' : 'none';
   }
-  // =============================
-// Contact Form Success Message
-// =============================
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form.contact-form");
-  const thankyou = document.getElementById("contact-thankyou");
 
-  if (!form || !thankyou) return;
+  if (items.length < 2) {
+    setShown(prev, false);
+    setShown(next, false);
+  }
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault(); // prevent default reload
+  function label(el) {
+    return el.alt || el.getAttribute('aria-label') || '';
+  }
 
-    const formData = new FormData(form);
+  function resetVideo() {
+    bigVideo.pause();
+    bigVideo.removeAttribute('src');
+    bigVideo.load();
+  }
 
-    const response = await fetch(form.action, {
-      method: form.method,
-      body: formData,
-      headers: { Accept: "application/json" }
-    });
-
-    if (response.ok) {
-      thankyou.hidden = false;   // show message
-      form.reset();              // clear form
+  function show(i) {
+    current = (i + items.length) % items.length;
+    var item = items[current];
+    if (item.tagName === 'VIDEO') {
+      setShown(bigImg, false);
+      bigImg.removeAttribute('src');
+      setShown(bigVideo, true);
+      bigVideo.setAttribute('aria-label', label(item));
+      bigVideo.src = item.currentSrc || item.src;
+      var start = item.currentTime || 0;
+      bigVideo.addEventListener('loadedmetadata', function seek() {
+        bigVideo.removeEventListener('loadedmetadata', seek);
+        try { bigVideo.currentTime = start; } catch (e) {}
+      });
+      var p = bigVideo.play();
+      if (p && p.catch) p.catch(function () {});
     } else {
-      alert("There was a problem sending your message. Please try again.");
+      resetVideo();
+      setShown(bigVideo, false);
+      setShown(bigImg, true);
+      bigImg.src = item.currentSrc || item.src;
+      bigImg.alt = item.alt;
     }
+  }
+
+  function open(i) {
+    opener = items[i];
+    show(i);
+    document.documentElement.style.overflow = 'hidden';
+    dialog.showModal();
+  }
+
+  dialog.addEventListener('close', function () {
+    document.documentElement.style.overflow = '';
+    resetVideo();
+    bigImg.removeAttribute('src');
+    if (opener) opener.focus({ preventScroll: true });
   });
-});
+
+  items.forEach(function (el, i) {
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', 'View larger: ' + label(el));
+    el.addEventListener('click', function () { open(i); });
+    el.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        open(i);
+      }
+    });
+  });
+
+  dialog.querySelector('.viewer__close').addEventListener('click', function () { dialog.close(); });
+  prev.addEventListener('click', function () { show(current - 1); });
+  next.addEventListener('click', function () { show(current + 1); });
+
+  // Click anywhere that isn't a button closes the viewer
+  dialog.addEventListener('click', function (e) {
+    if (!e.target.closest('button')) dialog.close();
+  });
+
+  dialog.addEventListener('keydown', function (e) {
+    if (items.length < 2) return;
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  // Swipe left/right on touch screens
+  var startX = null;
+  dialog.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  dialog.addEventListener('touchend', function (e) {
+    if (startX === null || items.length < 2) return;
+    var dx = e.changedTouches[0].clientX - startX;
+    startX = null;
+    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+  });
 })();
