@@ -1,302 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Graphic Design Portfolio | Alex Donahue</title>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio of Alex Donahue, showcasing graphic design, branding, layout, and motion graphics projects.">
+  <title>Alex Donahue | Design Portfolio</title>
+  <meta name="description" content="Alex Donahue is a visual designer crafting visual stories through strategic typography, layout, and design.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
 </head>
-<body>
+<body id="top">
 
-<header class="site-header" role="banner">
-  <div class="container header-inner">
-
-    <a href="index.html" class="site-logo">Alex Donahue</a>
-
-    <button
-      class="menu-toggle"
-      id="menu-toggle"
-      type="button"
-      aria-label="Toggle navigation menu"
-      aria-controls="primary-nav"
-      aria-expanded="false"
-    >
-      <span class="menu-icon" aria-hidden="true"></span>
-    </button>
-
-    <nav
-      class="site-nav"
-      id="primary-nav"
-      role="navigation"
-      aria-label="Primary navigation"
-    >
-      <ul class="nav-list">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main id="main-content">
-
-  <section class="hero">
-    <div class="container hero-inner">
-
-      <div class="hero-content">
-
-        <h1>Alex Donahue | Design Portfolio</h1>
-
-        <p class="hero-text">
-          Hi, I'm Alex Donahue, a Visual Designer crafting visual stories through strategic typography, layout, and print design.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">View selected work</a>
-          <a class="btn btn-ghost" href="about.html">About me</a>
-        </div>
+  <header class="container">
+    <nav class="site-nav" aria-label="Main">
+      <a class="site-nav__name" href="index.html">Home</a>
+      <div class="site-nav__links">
+        <a href="#projects">Case studies</a>
+        <a class="button" href="mailto:alexjdonahue@charter.net">Let&rsquo;s work together</a>
       </div>
-
-    </div>
-  </section>
-
-  <section id="projects" class="section">
-    <div class="container">
-      <h2>Selected design projects</h2>
-      <p class="section-intro">Projects in identity design, typography, layout, and print.</p>
-
-<div class="project-grid">
-  <!-- ================================
-     Sleeve Stories
-  =================================== -->
-  <div class="project-card">
-    <a href="sleevestories.html" class="project-link"></a>
-
-    <img src="images/sleevestories_mockup.webp"
-         alt="Sleeve Stories exhibit identity"
-         class="project-thumb">
-
-    <div class="project-overlay">
-      <h3>Sleeve Stories</h3>
-      <p>Short-term identity system for an album cover museum exhibit</p>
-    </div>
-  </div>
-
-  <!-- ================================
-     Mural Walk: UI/UX app
-  =================================== -->
-  <div class="project-card">
-    <a href="muralwalk.html" class="project-link"></a>
-
-    <img src="images/muralwalk_thumb.webp"
-         alt="Mural Walk UI/UX app"
-         class="project-thumb">
-
-    <div class="project-overlay">
-      <h3>Mural Walk</h3>
-      <p>UI/UX app for exploring street art murals</p>
-    </div>
-  </div>
-
-  <!-- ================================
-     NeoType: Orbitron type specimen
-  =================================== -->
-  <div class="project-card">
-    <img src="images/orbitron.webp" class="project-thumb">
-    <div class="project-overlay">
-      <h3>NeoType</h3>
-      <p>Type Specimen Book</p>
-      <a href="neotype.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-  <!-- ================================
-     Wild Boar one-page menu
-  =================================== -->
-  <div class="project-card">
-    <img src="images/wildboar.webp" class="project-thumb"
-         alt="Wild Boar BBQ restaurant menu">
-
-    <div class="project-overlay">
-      <h3>Wild Boar</h3>
-      <p>BBQ themed one-page restaurant menu.</p>
-      <a href="wildboar.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-  <!-- ================================
-     Christmas ABC book
-  =================================== -->
-  <div class="project-card">
-    <img src="images/abc.webp" class="project-thumb"
-         alt="Christmas ABC book and poster">
-
-    <div class="project-overlay">
-      <h3>Christmas ABC's</h3>
-      <p>Christmas themed custom typeface, book, and poster</p>
-      <a href="abc.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-  <!-- ================================
-     No Limits PlayStation brochure
-  =================================== -->
-  <div class="project-card">
-    <img src="images/NoLimits.webp" class="project-thumb"
-         alt="No Limits PlayStation brochure">
-
-    <div class="project-overlay">
-      <h3>No Limits</h3>
-      <p>Editorial brochure celebrating PlayStation.</p>
-      <a href="nolimits.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-  <!-- ================================
-     Design Poster
-  =================================== -->
-  <div class="project-card">
-    <img src="images/poster.webp" class="project-thumb"
-         alt="Quadrant Poster">
-
-    <div class="project-overlay">
-      <h3>Structure & Contrast</h3>
-      <p>Educational poster comparing Josef Müller-Brockmann and Armin Hofmann</p>
-      <a href="quadrant.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-    <!-- ================================
-     Matrix
-  =================================== -->
-  <div class="project-card">
-    <img src="images/matrix_1.webp" class="project-thumb"
-         alt="Matrix Kinetic Type">
-
-    <div class="project-overlay">
-      <h3>Matrix Kinetic Type</h3>
-      <p>Kinetic type motion graphics inspired by the Matrix film series</p>
-      <a href="matrix.html" class="project-link">View case study →</a>
-    </div>
-  </div>
-
-</div><!-- /project-grid -->
-  </div><!-- /container -->
-</section>
-
-<!-- ================================
-   CONTACT SECTION (FORM + ASIDE)
-=================================== -->
-<section id="contact" class="section" aria-labelledby="contact-heading">
-  <div class="container contact-layout">
-
-    <!-- LEFT COLUMN -->
-    <aside class="main-grid-sidebar contact-aside" aria-label="Additional contact information">
-      <p class="eyebrow">Contact</p>
-      <h1 id="contact-heading">Contact Alex Donahue</h1>
-      <p class="page-intro">
-        I'm currently open to new opportunities, collaborations, and design work. Use the contact
-        form to get in touch — I'd love to hear from you.
-      </p>
-      <p class="page-intro">
-        You can contact me using the form or via my email:
-      </p>
-      <p class="page-intro">
-        alexjdonahue@charter.net
-      </p>
-      <p id="contact-thankyou" class="thankyou-message" hidden>
-  Thanks for your message — I'll get back to you soon.
-</p>
-    </aside>
-
-    <!-- RIGHT COLUMN -->
-    <div class="main-grid-primary">
-      <h2 id="form-heading">Send a message</h2>
-
-      <form
-        class="contact-form"
-        action="https://formspree.io/f/mnnezqnb"
-        method="POST"
-      >
-
-        <!-- Name -->
-        <div class="form-field">
-          <label for="name">
-            Name <span class="required-indicator">(required)</span>
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autocomplete="name"
-            required
-            minlength="2"
-            aria-describedby="name-error"
-          >
-          <p id="name-error" class="field-error" aria-live="polite"></p>
-        </div>
-
-        <!-- Email -->
-        <div class="form-field">
-          <label for="email">
-            Email <span class="required-indicator">(required)</span>
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-            aria-describedby="email-error"
-          >
-          <p id="email-error" class="field-error" aria-live="polite"></p>
-        </div>
-
-        <!-- Message -->
-        <div class="form-field">
-          <label for="message">
-            Message <span class="required-indicator">(required)</span>
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            required
-            minlength="10"
-            aria-describedby="message-error"
-          ></textarea>
-          <p id="message-error" class="field-error" aria-live="polite"></p>
-        </div>
-
-        <button class="btn btn-primary contact-submit" type="submit">
-          Submit
-        </button>
-
-      </form>
-    </div>
-
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <p>Alex Donahue</p>
-    <nav aria-label="Footer navigation">
-      <ul class="footer-nav">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
     </nav>
-  </div>
-</footer>
+  </header>
+
+  <main class="container">
+    <section class="intro">
+      <h1>Alex Donahue<br>Design Portfolio</h1>
+      <p>&ldquo;Hi, I&rsquo;m <strong>Alex Donahue</strong>, a <strong>Visual Designer</strong> crafting visual stories through strategic <strong>typography, layout, and design.</strong>&rdquo;</p>
+
+      <ul class="services">
+        <li><img class="services__icon-img services__icon-img--tall" src="icons/identity.svg" alt="">Identity Design</li>
+        <li><img class="services__icon-img services__icon-img--tall" src="icons/print.svg" alt="">Print Design</li>
+        <li><img class="services__icon-img services__icon-img--tall" src="icons/socialmedia.svg" alt="">Social Media</li>
+        <li><img class="services__icon-img services__icon-img--tall" src="icons/motiongraphics.svg" alt="">Motion Graphics</li>
+        <li><img class="services__icon-img services__icon-img--short" src="icons/uiux.svg" alt="">UI/UX Design</li>
+        <li><img class="services__icon-img services__icon-img--short" src="icons/video.svg" alt="">Video</li>
+      </ul>
+    </section>
+
+    <section id="projects">
+      <h2 class="grid-label">Selected design projects</h2>
+
+      <!-- Image paths and case study links are placeholders. Update them to match your files. -->
+      <ul class="project-grid">
+
+        <li class="project">
+          <a class="project__link" href="sleeve-stories.html">
+            <img src="images/sleevestories_mockup.webp" alt="Sleeve Stories identity system: poster, mailer, banner, and merchandise mockups">
+            <div class="project__caption">
+              <h3 class="project__title">Sleeve Stories</h3>
+              <p class="project__desc">Identity system for a museum exhibit on the history of album covers.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="muralwalk.html">
+            <img src="images/muralwalk_thumb.webp" alt="MuralWalk app logo on a phone screen">
+            <div class="project__caption">
+              <h3 class="project__title">MuralWalk</h3>
+              <p class="project__desc">Mobile app for discovering public murals and walking routes between them.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="neo-type.html">
+            <img src="images/orbitron.webp" alt="Neo Type specimen book pairing Orbitron and Roboto">
+            <div class="project__caption">
+              <h3 class="project__title">Neo Type</h3>
+              <p class="project__desc">A type specimen book pairing Orbitron and Roboto.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="wild-boar.html">
+            <img src="images/wildboar.webp" alt="Wild Boar BBQ restaurant menu">
+            <div class="project__caption">
+              <h3 class="project__title">Wild Boar</h3>
+              <p class="project__desc">A one-page BBQ menu built around a five-level type hierarchy.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="christmas-abcs.html">
+            <img src="images/abc.webp" alt="Christmas display typeface specimen book spread">
+            <div class="project__caption">
+              <h3 class="project__title">Christmas ABC&rsquo;s</h3>
+              <p class="project__desc">A themed display typeface with a holiday word for each letter.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="no-limits.html">
+            <img src="images/nolimits_mockup.webp" alt="No Limits PlayStation history brochure cover and spreads">
+            <div class="project__caption">
+              <h3 class="project__title">No Limits</h3>
+              <p class="project__desc">A 16-page brochure on PlayStation console history.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="structure-and-contrast.html">
+            <img src="images/poster.webp" alt="Structure and Contrast Swiss design poster">
+            <div class="project__caption">
+              <h3 class="project__title">Structure and Contrast</h3>
+              <p class="project__desc">An educational poster on M&uuml;ller-Brockmann and Hofmann.</p>
+            </div>
+          </a>
+        </li>
+
+        <li class="project">
+          <a class="project__link" href="matrix.html">
+            <img src="images/matrix_1.webp" alt="Matrix title in glowing green type">
+            <div class="project__caption">
+              <h3 class="project__title">Matrix</h3>
+              <p class="project__desc">Kinetic typography animation of the red pill scene.</p>
+            </div>
+          </a>
+        </li>
+
+      </ul>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="site-footer">
+      <span>Alex Donahue</span>
+      <div class="site-footer__contact">
+        <a href="mailto:alexjdonahue@charter.net">alexjdonahue@charter.net</a>
+        <a href="tel:+12624163180">262-416-3180</a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="button back-to-top" href="#top">Back to top &uarr;</a>
 
 </body>
 </html>
