@@ -10,8 +10,8 @@
 :root {
   /* Colors */
   --color-bg: #171616;
-  --color-text: #EBDECB;
-  --color-button-bg: #EBDECB;
+  --color-text: #f4ede2;
+  --color-button-bg: #f4ede2;
   --color-button-text: #000000;
 
   --font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -25,8 +25,9 @@
   --fs-body: max(1.0625rem, calc(28 * var(--px)));
   --lh-body: 1.36;                                  /* Figma: 38 / 28 */
   --fs-subhead: var(--fs-body);
-  --fs-skills: max(1.125rem, calc(48 * var(--px)));
+  --fs-skills: max(1.125rem, calc(40 * var(--px)));
   --fs-tag: max(1rem, calc(28 * var(--px)));
+  --fs-case-body: max(1rem, calc(24 * var(--px)));   /* body text on project pages */
   --fs-ui: max(1rem, calc(18 * var(--px)));
 
   /* Spacing */
@@ -223,8 +224,8 @@ p {
   gap: 0.5em;
 }
 
-/* Icons are the Figma exports at 100%: 48px-tall icons = 1em, 36px-tall = 0.75em,
-   where 1em is the 48px skills text. */
+/* Icons keep the Figma proportions: 48px-tall icons = 1em, 36px-tall = 0.75em,
+   scaling with the skills text size. */
 .services__icon-img {
   flex: none;
   width: auto;
@@ -295,7 +296,7 @@ p {
     inset: auto 0 0 0;
     margin: 0;
     padding: 48px 24px 24px;
-    background: linear-gradient(to top, rgba(30, 29, 29, 0.92) 40%, rgba(30, 29, 29, 0));
+    background: linear-gradient(to top, rgba(17, 16, 16, 0.92) 40%, rgba(17, 16, 16, 0));
     opacity: 0;
     transition: opacity 0.2s ease;
     pointer-events: none;
@@ -382,6 +383,10 @@ p {
   margin-bottom: var(--gap-heading-text);
 }
 
+.case-section p {
+  font-size: var(--fs-case-body);
+}
+
 .case-section p:last-child {
   margin-bottom: 0;
 }
@@ -439,33 +444,36 @@ p {
   }
 }
 
+/* Rows of process images and sketches stay in one line at every screen size.
+   Every image in a row gets the same height, and each width follows the
+   image's own aspect ratio (--ar, set inline as width / height). object-fit
+   keeps heights uniform even if an exported file's ratio differs a little. */
 .media--row-3,
 .media--row-5 {
-  grid-template-columns: 1fr;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
 }
 
-.media--row-5 {
-  grid-template-columns: repeat(2, 1fr);
+.media--row-3 img,
+.media--row-5 img {
+  flex: var(--ar, 1) 1 0;
+  min-width: 0;
+  aspect-ratio: var(--ar, 1);
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-/* On wider screens these rows are "justified": every image in the row gets the
-   same height, and each width follows the image's own aspect ratio (--ar,
-   set inline as width / height). object-fit keeps heights uniform even if an
-   exported file's ratio is a little different from --ar. */
 @media (min-width: 768px) {
   .media--row-3,
   .media--row-5 {
-    display: flex;
-    align-items: flex-start;
+    gap: var(--grid-gap);
   }
 
   .media--row-3 img,
   .media--row-5 img {
-    flex: var(--ar, 1) 1 0;
-    min-width: 0;
-    aspect-ratio: var(--ar, 1);
-    height: auto;
-    object-fit: cover;
+    border-radius: var(--radius-image);
   }
 }
 
