@@ -612,3 +612,9 @@ p {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
 }
+
+/* A paragraph that follows the swatches or typeface list */
+.case-section .swatches + p,
+.case-section .type-list + p {
+  margin-top: var(--gap-text-media);
+}
